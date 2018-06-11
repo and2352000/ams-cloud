@@ -1,0 +1,59 @@
+html { font-size:100% }
+body {
+  //padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.font-title {
+  font-size: 4em;
+  text-align: center;
+  //font-family: 'Architects Daughter', cursive;
+  //font-family: 'Covered By Your Grace', cursive;
+  //font-family: 'Orbitron', sans-serif;
+  //font-family: 'Press Start 2P', cursive;
+  //font-family: 'Vast Shadow', cursive;
+  //font-family: 'Megrim', cursive;
+  font-family: 'Wallpoet', cursive;
+  //margin-top: 40px;
+}
+.font-title:hover{
+  color : green;
+  cursor: pointer;
+}
+
+.fileupload-guide{
+  font-size: 2rem;
+  height: 15rem;
+  text-align: center;
+}
+.info{
+  color: red;
+}
+.header{
+  margin-bottom: 40px;
+  padding: 5px;
+  background-color:black;
+  font-family: 'Press Start 2P', cursive;
+  overflow : auto;
+}
+.header:hover{
+  cursor: pointer;
+}
+.trademark{
+  float: left;
+  font-size:2rem;
+  color:white;
+}
+.trademark:hover{
+  color: #c91907;
+}
+.hyperLink{
+  padding: 8px;
+  margin-top:0.6rem;
+  float: right;
+  color: #FFFFFF;
+}

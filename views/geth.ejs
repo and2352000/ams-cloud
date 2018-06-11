@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        $("#timestamp").val(Date.now());
+      });
+    </script>
+  </head>
+  <body>
+    <h1 class = "font-title"><%= title %></h1>
+    <p>Coinbase : <%= coinbase %></p>
+    <p>Balance : <%= coinbaseBlance %> ether</p>
+
+    <form action="/geth" method="post">
+      <table>
+        <tr>
+          <p class='info'>＊必填</p>
+        </tr>
+        <tr>
+          <td><span class='info'>*</span>File Name :</td>
+          <td><input type = "text" name = "fileName" autofocus></td>
+        </tr>
+        <tr>
+          <td><span class='info'>*</span>User address :</td>
+          <td><input type = "text" name = "address" ></td>
+        </tr>
+          <td><span class='info'>*</span>File hash ID :</td>
+          <td><input type = "text" name = "hashId" placeholder = "MD5" ></td>
+        <tr>
+          <td><span class='info'>*</span>Timestamp :</td>
+          <td><input type = "number" id="timestamp" name = "timestamp" readonly></td>
+        </tr>
+        <tr>
+          <td><input type="submit" value="Submit"></td>
+        </tr>
+
+      </table>
+    </form>
+  </body>
+
+
+</html>

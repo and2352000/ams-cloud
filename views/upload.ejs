@@ -1,0 +1,73 @@
+<%- include('header'); -%>
+
+    <div class="container">
+      <div class="row">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-6">
+      <p class="font-title"><span><%= title %><span></p>
+      <form action="/upload" id = "form_upload" method="post" enctype="multipart/form-data">
+        <div class="input-group mb-3">
+          <input type="file" class="form-control" name="filetoupload" placeholder="Select your file" aria-label="Recipient's username" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" id = "bt_upload" type="button">Upload</button>
+          </div>
+
+        </div>
+        <input class="form-control" id = "signature" type="text" placeholder="Signature" name = "signature">
+      </form>
+      <br>
+            <%if(status=='success'){%>
+              <div class="alert alert-success" id = "success" >
+                <strong>Success!</strong> File upload is successful.
+              </div>
+            <%}%>
+            <%if(status=='illegal'){%>
+              <div class="alert alert-danger"  id = "illegal" >
+                <strong>Illegal!</strong> Signature is illegal..
+              </div>
+            <%}%>
+            <%if(status=='denied'){%>
+              <div class="alert alert-danger" id = "denied" >
+                <strong>Perminsion denied!</strong> You have no perminsion to upload.
+              </div>
+            <%}%>
+            <%if(status=='hashIdNotFound'){%>
+              <div class="alert alert-warning" id = "hashIdNotFound" >
+                <strong>Warning!</strong> File's Hash ID can't not found in Blockchain.
+              </div>
+            <%}%>
+
+
+
+      <div class="alert alert-warning" id = "warning" style = "display:none;">
+        <strong>Warning!</strong> Signature is necessary!.
+      </div>
+    </div>
+    <div class="col-sm-3"></div>
+    </div>
+    </div>
+    <%- include('footer'); -%>
+  </body>
+</html>
+
+<script>
+  $(document).ready(
+   function(){
+     $( "#bt_upload" ).click(function() {
+     //alert( "Handler for .click() called." );
+       var sig = $('#signature').val();
+       if(!sig){
+         //alert('Signature is necessary!');
+         $('#warning').show();
+         $('#success').hide();
+         $('#denied').hide();
+         $('#illegal').hide();
+         $( "#signature" ).css({"border-width":'2px',"border-color":"#e96b6b"});
+       }
+       else{
+         $( "#form_upload" ).submit();
+       }
+     });
+
+   });
+ </script>

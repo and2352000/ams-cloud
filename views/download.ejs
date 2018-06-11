@@ -1,0 +1,94 @@
+<%- include('header'); -%>
+    <div class="container">
+
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+          <p class="font-title"><span >Download<span></p>
+          <form action="/download" method="post">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" name="md5" placeholder="Search File with MD5" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+              </div>
+
+            </div>
+          </form>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-sm-2"></div>
+      <div class="col-sm-8">
+
+          <!--Find the file-->
+          <%if(status=='FIND'){%>
+
+            <div class="alert alert-info">
+
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <a href = "/file/<%=hashId%>" ><img src = "/images/icon_file.png"></a>
+                  </div>
+                  <div class="col-sm-9">
+                    Hash ID : <%=hashId%><br>
+                    File Name : <%= fileName %><br>
+                    Address : <%= address %><br>
+                    <span id ="timestamp"><span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="alert alert-warning">
+
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <a href = "/file/<%=hashId%>" ><img src = "/images/icon_file.png"></a>
+                  </div>
+                  <div class="col-sm-9">
+                    <h2>Simailar : <%=percentage%>%</h2></br>
+                    Hash ID : <%=mostSimFileHash%><br>
+                    File Name : <%= simFile[0] %><br>
+                    Address : <%= simFile[1] %><br>
+                    <span id ="timestamp_sim"><span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <%}
+          <!--Can't Not Find the file with hash-->
+          else{
+            if(status=='NOTFIND'){%>
+              <div class="alert alert-info">
+                There is no file with Hash ID (<%=hashId%>)
+              </div>
+            <%}%>
+
+          <%}%>
+
+      </div>
+      <div class="col-sm-2"></div>
+
+    </div>
+    </div>
+
+<%- include('footer'); -%>
+  </body>
+
+</html>
+
+<script>
+
+<%if(status=='FIND'){%>
+  var date= new Date(<%= timestamp%>);
+  var date_sim = new Date(<%= simFile[2]['c'][0]%>);
+  $(document).ready(function(){
+    $("#timestamp").text("Create Time : " + date.toDateString());
+    $("#timestamp_sim").text("Create Time : " + date_sim.toDateString());
+  });
+
+<%}%>
+
+</script>

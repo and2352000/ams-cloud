@@ -1,0 +1,23 @@
+/**
+This file is environment argument of project.
+*/
+
+
+var evn = {
+  "contractServer" :
+  {
+    "rpcUrl" : "http://localhost:8545"
+  },
+  "mainContract" :
+  {
+    "abi" : [{"constant":false,"inputs":[],"name":"getFileList","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"fileName","type":"string"},{"name":"addr","type":"address"},{"name":"hashId","type":"bytes32"},{"name":"timestamp","type":"uint256"}],"name":"setFile","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"addr","type":"address"}],"name":"getOwnerFiles","outputs":[{"name":"","type":"bytes32[]"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"hashId","type":"bytes32"}],"name":"getFileWithHash","outputs":[{"name":"","type":"string"},{"name":"","type":"address"},{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"}],
+    "address" : "0x2c2661cd7759bbf324a190866f41fb11ef0c74b1"
+  },
+  "file" :
+  {
+    #Change to your file store folder. Create a folder if it's not exist.
+    "fileStoragePath": __dirname+"/file-storage"
+  }
+}
+
+module.exports = evn;
