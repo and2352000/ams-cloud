@@ -15,7 +15,7 @@ var evn = {
   },
   "file" :
   {
-    #Change to your file store folder. Create a folder if it's not exist.
+    //Change to your file store folder. Create a folder if it's not exist.
     "fileStoragePath": __dirname+"/file-storage"
   }
 }

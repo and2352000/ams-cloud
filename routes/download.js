@@ -40,49 +40,66 @@ router.get("/download/:hashId",async function(req,res){
     SeedFileName = ComapareDirPath +"/"+fileName;
     var mostSimFileHash = null;
 
+
+
     //Compare all file in Folder with seed file
-    FolderFileMatcher(SeedFileName,ComapareDirPath,inputHashId)
-    .then((fileList)=>{
-      fileList.forEach((fileObj)=>{
-        var percentage = fileObj.percentage;
-        var percentage = new Number(percentage);
-        //Find Max simalar file
-        if(!simalarRank.name){
-          simalarRank.name = fileObj.fileName;
-          simalarRank.percentage = percentage.valueOf();
-        }
-        else if(percentage.valueOf()>simalarRank.percentage){
-          simalarRank.name = fileObj.fileName;
-          simalarRank.percentage = percentage.valueOf();
-        }
+  function folderFileMatcher2(Seed,ComPath,HashId){
+      FolderFileMatcher(Seed,ComPath,HashId)
+      .then((fileList)=>{
+        fileList.forEach((fileObj)=>{
+          var percentage = fileObj.percentage;
+          var percentage = new Number(percentage);
+          //Find Max simalar file
+          if(!simalarRank.name){
+            simalarRank.name = fileObj.fileName;
+            simalarRank.percentage = percentage.valueOf();
+          }
+          else if(percentage.valueOf()>simalarRank.percentage){
+            simalarRank.name = fileObj.fileName;
+            simalarRank.percentage = percentage.valueOf();
+          }
 
-        console.log("File Name :"+fileObj.fileName);
-        console.log("Percentage :"+fileObj.percentage+"%");
+          console.log("File Name :"+fileObj.fileName);
+          console.log("Percentage :"+fileObj.percentage+"%");
 
-      });
-      fs.readFile(ComapareDirPath+"/"+simalarRank.name,function(err,data){
-        if(err) res.send('download read file fail!');
-        mostSimFileHash = md5(data);
-        simfileData = geth.getFileWithHash(mostSimFileHash);
-        res.render('download',{fileName:fileData[0],
-                               address:fileData[1],
+        });
+        fs.readFile(ComapareDirPath+"/"+simalarRank.name,function(err,data){
+          if(err) res.send('download read file fail!');
+          mostSimFileHash = md5(data);
+          simfileData = geth.getFileWithHash(mostSimFileHash);
+          res.render('download',{fileName:fileData[0],
+                                 address:fileData[1],
+                                 hashId:req.params.hashId.toLowerCase(),
+                                 timestamp:fileData[2]['c'][0],
+                                 simFile : simfileData,
+                                 mostSimFileHash : mostSimFileHash,
+                                 percentage : simalarRank.percentage,
+                                 status:"FIND"});
+          //console.log(simfileData);
+        });
+        console.log("per :"+simalarRank.percentage);
+        console.log("Rank :"+simalarRank.name);
+
+
+      })
+      .catch(
+        (err)=>{console.log(err);}
+      )
+    }
+
+    fs.stat(SeedFileName,function(err){
+      if(err){
+        res.render('download',{fileName:null,
+                               address:null,
                                hashId:req.params.hashId.toLowerCase(),
-                               timestamp:fileData[2]['c'][0],
-                               simFile : simfileData,
-                               mostSimFileHash : mostSimFileHash,
-                               percentage : simalarRank.percentage,
-                               status:"FIND"});
-        //console.log(simfileData);
-      });
-      console.log("per :"+simalarRank.percentage);
-      console.log("Rank :"+simalarRank.name);
-
-
-    })
-    .catch(
-      (err)=>{console.log(err);}
-    )
-
+                               timestamp:null,
+                               simFile : null,
+                               percentage : null,
+                               status:"NONUPlOAD"});
+      return;
+      }
+      folderFileMatcher2(SeedFileName,ComapareDirPath,inputHashId);
+    });
 
 
 

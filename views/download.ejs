@@ -65,6 +65,11 @@
                 There is no file with Hash ID (<%=hashId%>)
               </div>
             <%}%>
+            <%if(status=='NONUPlOAD'){%>
+              <div class="alert alert-info">
+                Owner hasn't uploaded file!
+              </div>
+            <%}%>
 
           <%}%>
 
