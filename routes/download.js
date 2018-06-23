@@ -123,7 +123,7 @@ router.post("/download",function(req,res){
 
 function md5(content){
   var md5 = crypto.createHash('md5');
-  var result = md5.update(content).digest('hex');
+  var result = md5.update(content,'binary').digest('hex');
   return result;
 }
 

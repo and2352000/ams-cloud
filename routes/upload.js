@@ -48,7 +48,7 @@ router.post('/', function(req, res) {
     var storageFolder = evn.file.fileStoragePath+'/';
     var newpath = storageFolder + newFileName;
 
-    fs.readFile(oldpath, 'utf8' ,(err, data) => {
+    fs.readFile(oldpath ,(err, data) => {
       if (err) throw err;
       //console.log(data);
       newFileHashId = md5(data).toLowerCase();
@@ -75,7 +75,7 @@ router.post('/', function(req, res) {
 
       var publicOfFileOwner = fileData[1].toUpperCase();
       var publicOfFileSig = recoverMsg.toUpperCase();
-      
+
       // console.log("File's owner :"+  publicOfFileOwner);
       // console.log("Recover msg :"+ publicOfFileSig);
 
@@ -116,7 +116,7 @@ router.post('/', function(req, res) {
 
 function md5(content){
   var md5 = crypto.createHash('md5');
-  var result = md5.update(content).digest('hex');
+  var result = md5.update(content,'binary').digest('hex');
   return result;
 }
 module.exports = router;
